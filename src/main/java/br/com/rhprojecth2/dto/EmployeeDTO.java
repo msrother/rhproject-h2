@@ -1,7 +1,6 @@
 package br.com.rhprojecth2.dto;
 
 import java.util.Date;
-import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -33,5 +32,9 @@ public class EmployeeDTO {
     @ManyToOne
     @JoinColumn(name = "dpt_id")
     private DepartmentDTO department;
+
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private JobPositionDTO jobPosition;
 
 }
