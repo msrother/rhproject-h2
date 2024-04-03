@@ -3,10 +3,12 @@ package br.com.rhprojecth2.service;
 import br.com.rhprojecth2.dto.UserDTO;
 import br.com.rhprojecth2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UserService {
 
     @Autowired
@@ -16,7 +18,7 @@ public class UserService {
         return userRepository.save(dto);
     }
 
-    public List<UserDTO> listAll(UserDTO dto) {
+    public List<UserDTO> listAll() {
         return userRepository.findAll();
     }
 
