@@ -14,3 +14,5 @@ INSERT INTO tb_employees(emp_name, emp_address, emp_hiringDate, dpt_id, job_id) 
 INSERT INTO tb_employees(emp_name, emp_address, emp_hiringDate, dpt_id, job_id) VALUES ('Mario Bordi', 'Av. Castelão 897', '2019-06-29', 4, 3);
 INSERT INTO tb_employees(emp_name, emp_address, emp_hiringDate, dpt_id, job_id) VALUES ('Kalin Linnas', 'Rua da Distron 2311', '2017-08-23', 4, 2);
 
+INSERT INTO tb_users(usr_email, usr_password) VALUES ('admin@rh.com', 'admin123');
+INSERT INTO tb_users(usr_email, usr_password) VALUES ('teste@rh.com', 'teste123');
