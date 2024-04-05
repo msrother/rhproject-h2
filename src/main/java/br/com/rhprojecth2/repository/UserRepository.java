@@ -11,7 +11,7 @@ public interface UserRepository extends JpaRepository<UserDTO, Long> {
 
     public UserDTO findByEmail(String email);
 
-    @Query("SELECT u FROM UserDTO u WHERE u.password =:password ORDER BY u.id DESC")
+    @Query("SELECT u FROM UserDTO u WHERE u.password = :password ORDER BY u.id DESC")
     public List<UserDTO> findByPassword(@Param("password") String password);
 
 }
