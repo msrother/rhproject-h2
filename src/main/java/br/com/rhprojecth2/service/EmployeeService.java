@@ -18,7 +18,7 @@ public class EmployeeService {
         return employeeRepository.save(dto);
     }
 
-    public List<EmployeeDTO> lisAll() {
+    public List<EmployeeDTO> listAll() {
         return employeeRepository.findAll();
     }
 
@@ -26,16 +26,16 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    public void removeById(Long id) {
-        employeeRepository.deleteById(id);
-    }
-
     public List<EmployeeDTO> searchByName(String name) {
         return employeeRepository.findByNameContaining(name);
     }
 
-    public List<EmployeeDTO> searchByDepartId(Long departId) {
-        return employeeRepository.findByDepartId(departId);
+    public List<EmployeeDTO> searchByDepartmentId(Long departmentId) {
+        return employeeRepository.findByDepartmentId(departmentId);
+    }
+
+    public void removeById(Long id) {
+        employeeRepository.deleteById(id);
     }
 
 }
