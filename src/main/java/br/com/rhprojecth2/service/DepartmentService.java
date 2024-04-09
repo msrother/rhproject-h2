@@ -26,12 +26,11 @@ public class DepartmentService {
         return departmentRepository.findById(id);
     }
 
-    public void removeById(Long id) {
-        departmentRepository.deleteById(id);
-    }
-
     public List<DepartmentDTO> searchByName(String name) {
         return departmentRepository.findByNameContaining(name);
     }
 
+    public void removeById(Long id) {
+        departmentRepository.deleteById(id);
+    }
 }
