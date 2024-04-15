@@ -24,4 +24,7 @@ public class UserDTO {
     @Column(name = "usr_password", nullable = false)
     private String password;
 
+    @Transient
+    private String token;
+
 }
