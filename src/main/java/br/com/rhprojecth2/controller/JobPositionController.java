@@ -3,6 +3,7 @@ package br.com.rhprojecth2.controller;
 
 import br.com.rhprojecth2.dto.JobPositionDTO;
 import br.com.rhprojecth2.service.JobPositionService;
+import br.com.rhprojecth2.utils.TokenJWT;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,32 +25,41 @@ public class JobPositionController {
 
     @PostMapping(value = "/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public JobPositionDTO createJobPosition(@RequestBody JobPositionDTO jobPosition) {
+    public JobPositionDTO createJobPosition(@RequestBody JobPositionDTO jobPosition,
+                                            @RequestHeader(value = "token") String token) {
+        TokenJWT.validateToken(token);
         return jobPositionService.save(jobPosition);
     }
 
     @GetMapping(value = "/list")
     @ResponseStatus(HttpStatus.OK)
-    public List<JobPositionDTO> listAll() {
+    public List<JobPositionDTO> listAll(@RequestHeader(value = "token") String token) {
+        TokenJWT.validateToken(token);
         return jobPositionService.listAll();
     }
 
     @GetMapping(value = "/searchById")
     @ResponseStatus(HttpStatus.OK)
-    public JobPositionDTO searchById(@RequestHeader(value = "id") Long id) {
+    public JobPositionDTO searchById(@RequestHeader(value = "id") Long id,
+                                     @RequestHeader(value = "token") String token) {
+        TokenJWT.validateToken(token);
         return jobPositionService.searchById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Job position not found."));
     }
 
     @GetMapping(value = "/searchByName")
     @ResponseStatus(HttpStatus.OK)
-    public List<JobPositionDTO> searchByName(@RequestHeader(value = "name") String name) {
+    public List<JobPositionDTO> searchByName(@RequestHeader(value = "name") String name,
+                                             @RequestHeader(value = "token") String token) {
+        TokenJWT.validateToken(token);
         return jobPositionService.searchByName(name);
     }
 
     @PutMapping(value = "/update")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateJobPosition(@RequestBody JobPositionDTO jobPosition) {
+    public void updateJobPosition(@RequestBody JobPositionDTO jobPosition,
+                                  @RequestHeader(value = "token") String token) {
+        TokenJWT.validateToken(token);
         jobPositionService.searchById(jobPosition.getId())
                 .map(foundJobPosition -> {
                     modelMapper.map(jobPosition, foundJobPosition);
@@ -60,7 +70,9 @@ public class JobPositionController {
 
     @DeleteMapping(value = "/delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeJobPosition(@RequestHeader(value = "id") Long id) {
+    public void removeJobPosition(@RequestHeader(value = "id") Long id,
+                                  @RequestHeader(value = "token") String token) {
+        TokenJWT.validateToken(token);
         jobPositionService.searchById(id)
                 .map(jobPositionFound -> {
                     jobPositionService.removeById(jobPositionFound.getId());
